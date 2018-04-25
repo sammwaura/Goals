@@ -8,7 +8,21 @@ import { GoalComponent } from './goal/goal.component';
 import { StrikethroughDirective } from './strikethrough.directive';
 import { DateCountPipe } from './date-count.pipe';
 import { GoalFormComponent } from './goal-form/goal-form.component';
-
+import { AlertsService } from './alert-service/alerts.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AboutComponent } from './about/about.component';
+import { RouterModule, Routes } from '@angular/router';
+import { NgProgressModule } from '@ngx-progressbar/core';
+import { NgProgressHttpModule } from '@ngx-progressbar/http';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { RoutingModule} from './routing/routing.module'
+//Defining routes
+const routes: Routes = [
+  { path: "goals", component: GoalComponent },
+  { path: "about", component: AboutComponent },
+  { path:"",redirectTo:"/goals",pathMatch:"full"},
+  { path:'**',component:NotFoundComponent }
+]
 
 @NgModule({
   declarations: [
@@ -17,13 +31,23 @@ import { GoalFormComponent } from './goal-form/goal-form.component';
     GoalComponent,
     StrikethroughDirective,
     DateCountPipe,
-    GoalFormComponent
+    GoalFormComponent,
+    AboutComponent,
+    NotFoundComponent
+
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RoutingModule,
+    HttpClientModule,
+    NgProgressModule.forRoot(),//normal progress bar
+    NgProgressHttpModule, // progress bar to load http requests
+    RouterModule.forRoot(routes)
+
   ],
-  providers: [],
+
+  providers: [AlertsService], //Add service to providers
   bootstrap: [AppComponent]
 })
 export class AppModule { }

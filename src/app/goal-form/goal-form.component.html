@@ -1,6 +1,6 @@
 <div class="container-fluid">
   <div class="row">
-    <form #goalForm='ngForm'>
+  <form (ngSubmit)='submitGoal()' #goalForm='ngForm'>
       <!--Name Form-->
         <div class="form-group">
           <label for="name">Name</label>
@@ -34,9 +34,9 @@
 
                   </div>
         </div>
-        <form (ngSubmit) ='submitGoal()' #goalForm='ngForm'></form>
+       
         <button type="Submit" class="btn btn-success-lg"> Add Goal </button>
-    </form>
+        </form>
   </div>
 </div>
 
